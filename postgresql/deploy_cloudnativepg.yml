@@ -1,0 +1,15 @@
+- name: Deploy CloudNativePG Helm Chart
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Ensure Helm is installed
+      command: helm version
+      register: helm_version
+      failed_when: helm_version.rc != 0
+
+    - name: Add CloudNativePG Helm repository
+      command: helm repo add cloudnative-pg https://cloudnative-pg.github.io/helm-charts
+      ignore_errors: yes
+
+    - name: Update Helm repositories
+      command: helm repo update
