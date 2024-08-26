@@ -1,6 +1,6 @@
 - name: Deploy CloudNativePG Helm Chart
   hosts: 192.168.3.129
-  become: yes
+  become: no
   gather_facts: no
   
   tasks:
