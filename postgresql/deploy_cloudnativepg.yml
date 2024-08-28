@@ -2,7 +2,9 @@
   hosts: 192.168.3.129
   become: yes
   gather_facts: no
-  
+  vars:
+    kubeconfig_path: /etc/rancher/rke2/rke2.yaml   # Update this path to your kubeconfig file
+
   tasks:
     - name: Ensure Helm is installed
       command: helm version
@@ -10,8 +12,17 @@
       failed_when: helm_version.rc != 0
 
     - name: Add CloudNativePG Helm repository
-      command: helm repo add cloudnative-pg https://cloudnative-pg.github.io/helm-charts
-      ignore_errors: yes
+      kubernetes.core.helm:
+        name: cloudnative-pg
+        repo_url: https://cloudnative-pg.github.io/helm-charts
+        state: present
+        kubeconfig: "{{ kubeconfig_path }}"
 
     - name: Update Helm repositories
-      command: helm repo update
+      kubernetes.core.helm:
+        name: cloudnative-pg
+        repo_url: https://cloudnative-pg.github.io/helm-charts
+        state: present
+        kubeconfig: "{{ kubeconfig_path }}"
+        update_repos: yes
+
