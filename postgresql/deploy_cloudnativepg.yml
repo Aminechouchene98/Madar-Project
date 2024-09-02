@@ -12,8 +12,9 @@
       failed_when: helm_version.rc != 0
 
     - name: Add CloudNativePG Helm repository
-      kubernetes.core.helm:
-        name: cnpg
+      kubernetes.core.helm_repository:
+        name: stable
+        chart_ref: cnpg
         repo_url: https://cloudnative-pg.github.io/charts
         state: present
         kubeconfig: "{{ kubeconfig_path }}"
