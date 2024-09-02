@@ -17,6 +17,7 @@
         repo_url: https://cloudnative-pg.github.io/helm-charts
         state: present
         kubeconfig: "{{ kubeconfig_path }}"
+        release_namespace: cnpg-system
 
     - name: Update Helm repositories
       kubernetes.core.helm:
@@ -25,4 +26,5 @@
         state: present
         kubeconfig: "{{ kubeconfig_path }}"
         update_repos: yes
+        release_namespace: cnpg-system
 
