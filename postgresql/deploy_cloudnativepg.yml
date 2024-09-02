@@ -14,7 +14,7 @@
     - name: Add CloudNativePG Helm repository
       kubernetes.core.helm:
         name: cnpg
-        repo_url: helm repo add cnpg https://cloudnative-pg.github.io/charts
+        repo_url: https://cloudnative-pg.github.io/charts
         state: present
         kubeconfig: "{{ kubeconfig_path }}"
         release_namespace: cnpg-system
@@ -22,7 +22,7 @@
     - name: Update Helm repositories
       kubernetes.core.helm:
         name: cnpg
-        repo_url: https://cloudnative-pg.github.io/helm-charts
+        repo_url: https://cloudnative-pg.github.io/charts
         state: present
         kubeconfig: "{{ kubeconfig_path }}"
         update_repos: yes
