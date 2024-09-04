@@ -21,7 +21,7 @@
         dest: "/tmp/values.yaml"
 
     - name: Install Helm Chart
-      community.kubernetes.helm:
+      kubernetes.core.helm:
         name: "{{ helm_release }}"
         chart_ref: "{{ helm_chart_ref }}"
         namespace: "{{ helm_namespace }}"
