@@ -7,7 +7,7 @@
     helm_chart_ref: oci://registry-1.docker.io/bitnamicharts/postgresql-ha # Replace with your actual chart
     helm_release: my-release          # Replace with your release name
     helm_namespace: default          # Replace with your namespace if needed
-    github_repo: https://raw.githubusercontent.com/Aminechouchene98/ansibleplaybooks/main/postgesql/values.yaml
+    github_repo: https://raw.githubusercontent.com/Aminechouchene98/ansibleplaybooks/main/postgresql/values.yaml
     
   tasks:
     - name: Ensure Helm is installed
