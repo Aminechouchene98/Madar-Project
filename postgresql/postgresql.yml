@@ -4,7 +4,7 @@
   gather_facts: no
   vars:
     kubeconfig_path: /etc/rancher/rke2/rke2.yaml   # Update this path to your kubeconfig file
-    helm_chart: bitnami/chart-name  # Replace with your actual chart
+    helm_chart_ref: oci://registry-1.docker.io/bitnamicharts/postgresql-ha # Replace with your actual chart
     helm_release: my-release          # Replace with your release name
     helm_namespace: default          # Replace with your namespace if needed
     github_repo: https://raw.githubusercontent.com/Aminechouchene98/ansibleplaybooks/main/postgesql/values.yaml
@@ -20,4 +20,16 @@
         url: "{{ github_repo }}"
         dest: "/tmp/values.yaml"
 
-
+    - name: Install Helm Chart
+      community.kubernetes.helm:
+        name: "{{ helm_release }}"
+        chart_ref: "{{ helm_chart }}"
+        namespace: "{{ helm_namespace }}"
+        values_files:
+          - /tmp/values.yaml
+        state: present
+      register: helm_result
+      
+    - name: Display Helm result
+      debug:
+        msg: "{{ helm_result }}"  
