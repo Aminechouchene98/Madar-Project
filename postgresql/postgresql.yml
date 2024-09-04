@@ -10,12 +10,7 @@
     github_repo: https://raw.githubusercontent.com/Aminechouchene98/ansibleplaybooks/main/postgresql/values.yaml
     
   tasks:
-    - name: Ensure Helm is installed
-      command: helm version
-      register: helm_version
-      failed_when: helm_version.rc != 0
-      kubeconfig: "{{ kubeconfig_path }}"
-
+     
     - name: Download values.yaml from GitHub
       get_url:
         url: "{{ github_repo }}"
