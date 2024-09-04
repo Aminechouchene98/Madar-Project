@@ -14,6 +14,7 @@
       command: helm version
       register: helm_version
       failed_when: helm_version.rc != 0
+      kubeconfig: "{{ kubeconfig_path }}"
 
     - name: Download values.yaml from GitHub
       get_url:
@@ -28,6 +29,7 @@
         values_files:
           - /tmp/values.yaml
         state: present
+        kubeconfig: "{{ kubeconfig_path }}"
       register: helm_result
       
     - name: Display Helm result
